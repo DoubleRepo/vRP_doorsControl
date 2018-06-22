@@ -36,7 +36,7 @@ RegisterServerEvent('door:status')
 AddEventHandler('door:status', function(id, status)
   user_id = vRP.getUserId({source})
   player = vRP.getUserSource({user_id})
-  if vRP.hasPermission({user_id, "#"..doorList[id].key..".>0"}) or vRP.hasPermission({user_id,doorList[id].permission}) then
+  if vRP.getInventoryItemAmount({user_id,doorList[id].key}) > 0 and vRP.hasPermission({user_id,doorList[id].permission}) then
     doorList[id].freeze=status
     TriggerClientEvent('door:statusSend', -1, id, status)
     if status then
